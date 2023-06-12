@@ -281,6 +281,8 @@ DID_SPAWN	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio
 Data	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/reqwest-0.11.18/src/async_impl/body.rs	/^    type Data = Bytes;$/;"	T
 Data	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/reqwest-0.11.18/src/async_impl/decoder.rs	/^    type Data = Bytes;$/;"	T
 Data	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_derive-1.0.163/src/internals/ast.rs	/^pub enum Data<'a> {$/;"	g
+DataPack	/Users/mart/code/space_trader_egui/src/main.rs	/^struct DataPack {$/;"	s
+DataType	/Users/mart/code/space_trader_egui/src/main.rs	/^enum DataType {$/;"	g
 DatePickerButton	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/egui_extras-0.22.0/src/datepicker/button.rs	/^pub struct DatePickerButton<'a> {$/;"	s
 DatePickerPopupState	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/egui_extras-0.22.0/src/datepicker/popup.rs	/^struct DatePickerPopupState {$/;"	s
 DeImplGenerics	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_derive-1.0.163/src/de.rs	/^struct DeImplGenerics<'a>(&'a Parameters);$/;"	s
@@ -449,6 +451,8 @@ FRAGMENT_ENCODE_SET	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15
 FROM	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_derive-1.0.163/src/internals/symbol.rs	/^pub const FROM: Symbol = Symbol("from");$/;"	c
 FULL	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_json-1.0.96/src/lexical/num.rs	/^    const FULL: i32 = 64;$/;"	c
 FULL	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_json-1.0.96/src/lexical/num.rs	/^    const FULL: i32;$/;"	c
+Faction	/Users/mart/code/space_trader_egui/src/main.rs	/^struct Faction {$/;"	s
+FactionName	/Users/mart/code/space_trader_egui/src/main.rs	/^enum FactionName {$/;"	g
 Field	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.163/src/de/impls.rs	/^        enum Field {$/;"	g
 Field	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.163/src/de/impls.rs	/^    enum Field {$/;"	g
 Field	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_derive-1.0.163/src/internals/ast.rs	/^pub struct Field<'a> {$/;"	s
@@ -1820,6 +1824,7 @@ Waiters	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1
 Waiting	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/process/windows.rs	/^struct Waiting {$/;"	s
 Waitlist	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/sync/batch_semaphore.rs	/^struct Waitlist {$/;"	s
 WakerRef	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/sync/task/atomic_waker.rs	/^trait WakerRef {$/;"	t
+Waypoint	/Users/mart/code/space_trader_egui/src/main.rs	/^struct Waypoint {$/;"	s
 WeakSender	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/sync/mpsc/bounded.rs	/^pub struct WeakSender<T> {$/;"	s
 WeakUnboundedSender	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/sync/mpsc/unbounded.rs	/^pub struct WeakUnboundedSender<T> {$/;"	s
 WebGlContextOption	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/eframe-0.22.0/src/epi/mod.rs	/^pub enum WebGlContextOption {$/;"	g
@@ -1989,7 +1994,7 @@ addr_of_values	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/
 advance	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/io/read_buf.rs	/^    pub fn advance(&mut self, n: usize) {$/;"	f
 advance	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/time/clock.rs	/^    pub async fn advance(duration: Duration) {$/;"	f
 advance_mut	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/io/read_buf.rs	/^    unsafe fn advance_mut(&mut self, cnt: usize) {$/;"	f
-agent_data_request	/Users/mart/code/space_trader_egui/src/main.rs	/^fn agent_data_request(tx: Sender<serde_json::Value>, ctx: egui::Context, token: String) {$/;"	f
+agent_data_request	/Users/mart/code/space_trader_egui/src/main.rs	/^fn agent_data_request(tx: Sender<DataPack>, ctx: egui::Context, token: String) {$/;"	f
 aim_radius	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/egui-0.22.0/src/input_state.rs	/^    pub fn aim_radius(&self) -> f32 {$/;"	f
 aliases	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_derive-1.0.163/src/internals/attr.rs	/^    pub fn aliases(&self) -> Vec<String> {$/;"	f
 align2	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/egui-0.22.0/src/layout.rs	/^    fn align2(&self) -> Align2 {$/;"	f
@@ -6633,7 +6638,7 @@ register	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-
 register	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/process/unix/mod.rs	/^    fn register($/;"	f
 register_listener	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/signal/registry.rs	/^    fn register_listener(&self, event_id: EventId) -> watch::Receiver<()> {$/;"	f
 register_panics_on_invalid_input	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/signal/registry.rs	/^    fn register_panics_on_invalid_input() {$/;"	f
-register_request	/Users/mart/code/space_trader_egui/src/main.rs	/^fn register_request(tx: Sender<serde_json::Value>, ctx: egui::Context) {$/;"	f
+register_request	/Users/mart/code/space_trader_egui/src/main.rs	/^fn register_request(tx: Sender<DataPack>, ctx: egui::Context) {$/;"	f
 reject_remote_clients	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/net/windows/named_pipe.rs	/^    pub fn reject_remote_clients(&mut self, reject: bool) -> &mut Self {$/;"	f
 relative	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/egui_extras-0.22.0/src/sizing.rs	/^    pub fn relative(fraction: f32) -> Self {$/;"	f
 release	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/runtime/blocking/schedule.rs	/^    fn release(&self, _task: &Task<Self>) -> Option<Task<Self>> {$/;"	f
@@ -8586,7 +8591,7 @@ was_tooltip_open_last_frame	/Users/mart/.cargo/registry/src/index.crates.io-6f17
 watch_borrow	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/sync/watch.rs	/^    fn watch_borrow() {$/;"	f
 watch_spurious_wakeup	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/sync/watch.rs	/^    fn watch_spurious_wakeup() {$/;"	f
 watch_test	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.28.1/src/sync/tests/notify.rs	/^fn watch_test() {$/;"	f
-waypoint_request	/Users/mart/code/space_trader_egui/src/main.rs	/^fn waypoint_request($/;"	f
+waypoint_request	/Users/mart/code/space_trader_egui/src/main.rs	/^fn waypoint_request(waypoint: String, tx: Sender<DataPack>, ctx: egui::Context, token: String) {$/;"	f
 waypoint_url_builder	/Users/mart/code/space_trader_egui/src/main.rs	/^fn waypoint_url_builder(waypoint: &str) -> String {$/;"	f
 weak	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/egui-0.22.0/src/ui.rs	/^    pub fn weak(&mut self, text: impl Into<RichText>) -> Response {$/;"	f
 weak	/Users/mart/.cargo/registry/src/index.crates.io-6f17d22bba15001f/egui-0.22.0/src/widget_text.rs	/^    pub fn weak(mut self) -> Self {$/;"	f

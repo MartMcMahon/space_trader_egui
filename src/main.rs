@@ -15,8 +15,8 @@ use std::io::prelude::*;
 
 struct STApp {
     // Sender/Receiver for async notifications.
-    tx: Sender<serde_json::Value>,
-    rx: Receiver<serde_json::Value>,
+    tx: Sender<DataPack>,
+    rx: Receiver<DataPack>,
 
     // Silly app state.
     state: AppState,
@@ -31,6 +31,7 @@ struct STApp {
     error_text: String,
 
     agent_data: AgentData,
+    waypoint: Waypoint,
 }
 
 // enum RequestBody {
@@ -160,6 +161,7 @@ impl Default for STApp {
             error_text: String::new(),
 
             agent_data: AgentData::default(),
+            waypoint: Waypoint::default(),
         }
     }
 }
@@ -183,10 +185,8 @@ impl eframe::App for STApp {
                 });
 
                 if let Ok(rec) = self.rx.try_recv() {
-                    self.validation_text = serde_json::from_value(
-                        rec.get("data").unwrap().get("token").unwrap().clone(),
-                    )
-                    .unwrap();
+                    self.validation_text =
+                        serde_json::from_value(rec.data.get("token").unwrap().clone()).unwrap();
 
                     write_token(self.validation_text.clone()).unwrap();
                 }
@@ -194,9 +194,22 @@ impl eframe::App for STApp {
             AppState::Main => {
                 // Update the counter with the async response.
                 if let Ok(rec) = self.rx.try_recv() {
-                    println!("{:#?}", rec);
-                    self.agent_data =
-                        serde_json::from_value(rec.get("data").unwrap().clone()).unwrap();
+                    // println!("{:#?}", rec);
+                    match rec {
+                        DataPack {
+                            data_type: DataType::Agent,
+                            data: res,
+                        } => {
+                            self.agent_data = serde_json::from_value(res).unwrap();
+                        }
+                        DataPack {
+                            data_type: DataType::Waypoint,
+                            data: res,
+                        } => {
+                            self.waypoint = serde_json::from_value(res).unwrap();
+                        }
+                    }
+                    // serde_json::from_value(rec.get("data").unwrap().clone()).unwrap();
                 }
 
                 egui::CentralPanel::default().show(ctx, |ui| {
@@ -225,7 +238,7 @@ impl eframe::App for STApp {
     }
 }
 
-fn register_request(tx: Sender<serde_json::Value>, ctx: egui::Context) {
+fn register_request(tx: Sender<DataPack>, ctx: egui::Context) {
     let register_url = "https://api.spacetraders.io/v2/register".to_owned();
     tokio::spawn(async move {
         let res: serde_json::Value = Client::default()
@@ -242,12 +255,15 @@ fn register_request(tx: Sender<serde_json::Value>, ctx: egui::Context) {
             .unwrap();
 
         print!("{:#?}", res);
-        let _ = tx.send(res);
+        let _ = tx.send(DataPack {
+            data_type: DataType::Agent,
+            data: res,
+        });
         ctx.request_repaint();
     });
 }
 
-fn agent_data_request(tx: Sender<serde_json::Value>, ctx: egui::Context, token: String) {
+fn agent_data_request(tx: Sender<DataPack>, ctx: egui::Context, token: String) {
     let agent_data_url = "https://api.spacetraders.io/v2/my/agent";
     let mut headers = HeaderMap::new();
     headers.insert(
@@ -270,7 +286,11 @@ fn agent_data_request(tx: Sender<serde_json::Value>, ctx: egui::Context, token: 
             .await
             .unwrap();
 
-        let _ = tx.send(res);
+        let _ = tx.send(DataPack {
+            data_type: DataType::Agent,
+            data: res.get("data").unwrap().clone(),
+        });
+
         ctx.request_repaint();
     });
 }
@@ -289,12 +309,11 @@ struct AgentData {
     symbol: String,
 }
 
-fn waypoint_request(
-    waypoint: String,
-    tx: Sender<serde_json::Value>,
-    ctx: egui::Context,
-    token: String,
-) {
+fn waypoint_request(waypoint: String, tx: Sender<DataPack>, ctx: egui::Context, token: String) {
+    if waypoint.len() == 0 {
+        return;
+    }
+
     let mut headers = HeaderMap::new();
     headers.insert(
         "Content-Type",
@@ -316,16 +335,60 @@ fn waypoint_request(
             .await
             .unwrap();
 
-        let _ = tx.send(res);
+        println!("{:#?}", res.get("data").unwrap());
+
+        let _ = tx.send(DataPack {
+            data_type: DataType::Waypoint,
+            data: res.get("data").unwrap().clone(),
+        });
         ctx.request_repaint();
     });
 }
 
 fn waypoint_url_builder(waypoint: &str) -> String {
     let parts: Vec<&str> = waypoint.split("-").collect();
+    println!("waypoint, {}", waypoint);
     format!(
         "https://api.spacetraders.io/v2/systems/{}/waypoints/{}",
         parts[..2].join("-"),
         parts.join("-")
     )
+}
+
+enum DataType {
+    Agent,
+    Waypoint,
+}
+
+struct DataPack {
+    data_type: DataType,
+    data: serde_json::Value,
+}
+
+#[derive(Default, Deserialize, Serialize)]
+struct Waypoint {
+    #[serde(rename = "systemSymbol")]
+    system_symbol: String,
+    symbol: String,
+    #[serde(rename = "type")]
+    waypoint_type: String,
+    x: i32,
+    y: i32,
+    orbitals: Vec<serde_json::Value>,
+    traits: Vec<serde_json::Value>,
+    // { "symbol": "OVERCROWDED",
+    //   "name": "Overcrowded",
+    //   "description": "A waypoint teeming with inhabitants, leading to cramped living conditions and a high demand for resources." },
+    chart: serde_json::Value,
+    // { "submittedBy": "COSMIC", "submittedOn": "2023-06-10T15:55:44.111Z" },
+    faction: Faction,
+}
+#[derive(Default, Deserialize, Serialize)]
+enum FactionName {
+    #[default]
+    COSMIC,
+}
+#[derive(Default, Deserialize, Serialize)]
+struct Faction {
+    symbol: FactionName,
 }
